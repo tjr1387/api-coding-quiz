@@ -1,4 +1,3 @@
-
     // Element selectors
 const timerEl = document.getElementById('timer');
 const questionEl = document.getElementById('question-text');
@@ -7,13 +6,17 @@ const ansTwoEl = document.getElementById('opt-two');
 const ansThreeEl = document.getElementById('opt-three');
 const ansFourEl = document.getElementById('opt-four');
 const feedbackEl = document.getElementById('feedback');
-
+const ansAreaEl = document.getElementById('answer-area');
 
 
     // Global variables
-let timer = 60;
+let rightAnswers = 0;
+let wrongAnswers = 0;
+let isOver = false;
+let timer;
+let timerCount;
 
-    //the quiz array; each question in an object, with the 'answers' key being an array of objects
+    // The quiz array; each question in an object, with the 'answers' key being an array of objects
         //the correct answer has a second key/value pair used to identify it
 const quiz = [
     { question: "Which choice is NOT an HTML tag?",
@@ -100,13 +103,80 @@ const quiz = [
 
 
 // functions and logic will go here
+// The setTimer function starts and stops the timer and triggers winGame() and loseGame()
+// function startTimer() {
+//     // Sets timer
+//     timer = setInterval(function() {
+//       timerCount--;
+//       timerEl.textContent = timerCount;
+//       if (timerCount >= 0) {
+//         // Tests if win condition is met
+//         if (isOver && timerCount > 0) {
+//           // Clears interval and stops timer
+//           clearInterval(timer);
+//         //   winGame();
+//         }
+//       }
+//       // Tests if time has run out
+//       if (timerCount === 0) {
+//         // Clears interval
+//         clearInterval(timer);
+//         timerEl.textContent = 0;
+//         // loseGame();
+//       }
+//     }, 1000);
+//   }
 
-    // loops thru the quiz array and loads each question/answer set
-    // still need to figure out how to prevent the loop from executing until a click (on an answer) is made
-for (let i = 0; i < quiz.length; i++) {
-    questionEl.textContent = quiz[i].question;
-    ansOneEl.textContent = quiz[i].answers[0].text;
-    ansTwoEl.textContent = quiz[i].answers[1].text;
-    ansThreeEl.textContent = quiz[i].answers[2].text;
-    ansFourEl.textContent = quiz[i].answers[3].text;
+    // Given an index, puts its question/answers on the screen
+function setQuestion(index) {
+    questionEl.textContent = quiz[index].question;
+    ansOneEl.textContent = quiz[index].answers[0].text;
+    ansTwoEl.textContent = quiz[index].answers[1].text;
+    ansThreeEl.textContent = quiz[index].answers[2].text;
+    ansFourEl.textContent = quiz[index].answers[3].text;
 }
+
+
+function printEnd() {
+    console.log(`game over`, rightAnswers, wrongAnswers);
+}
+
+// given the index of the quiz array, this will return the text of the correct answer (for matching)
+function getCorrectAns(index) {
+    const q = quiz[index];
+    for (a of q.answers) {
+        if (a.isCorrect) {
+            return a.text;
+        }
+    }
+}
+
+// timerCount = 10
+// startTimer();
+
+let i = 0;
+setQuestion(i);
+
+ansAreaEl.addEventListener('click', function(event) {
+    const selected = event.target;
+    if (selected.matches("p") && !isOver) {
+        if (selected.textContent === getCorrectAns(i)) {
+            feedbackEl.textContent = `Correct!`;
+            rightAnswers++;
+        } else {
+            feedbackEl.textContent = `Wrong`;
+            // decerement timer
+            wrongAnswers++;
+        }
+        i++;
+        if (i < quiz.length) {
+            setQuestion(i);
+        } else {
+            isOver = true;
+            printEnd();
+        }
+        // setTimeout(feedbackEl.textContent = '', 1000);
+    }
+});
+
+

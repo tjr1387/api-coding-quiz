@@ -8,7 +8,7 @@
 /* -------------- */
 nav {
     background-color:aliceblue;
-    padding: 5px;
+    padding: 10px;
     font-size: 24px;
     border-bottom: 2px solid darkblue;
     min-height: 40px;
@@ -61,8 +61,16 @@ p {
     color: aliceblue;
     font-size: 16px;
     padding: 8px;
-    margin: 5px auto;
+    margin: 5px;
+}
+
+p:hover {
+    cursor: pointer;
+}
+
+#answer-area {
     width: 300px;
+    margin: 0 auto;
 }
 
 #feedback {
