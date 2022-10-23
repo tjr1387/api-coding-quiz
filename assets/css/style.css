@@ -1,4 +1,81 @@
 * {
     font-family: 'Trebuchet', sans-serif;
-    background-color: rgb(187, 169, 253)
+    background-color: rgb(216, 206, 253)
 }
+
+
+/* Header styling */
+/* -------------- */
+nav {
+    background-color:aliceblue;
+    padding: 5px;
+    font-size: 24px;
+    border-bottom: 2px solid darkblue;
+    min-height: 40px;
+}
+
+nav a {
+    background-color: inherit;
+    text-decoration: none;
+}
+
+nav a:hover {
+    font-weight: 600;
+    color: darkblue;
+}
+
+#timer {
+    float: right;
+    background-color: inherit;
+    color: rgb(192, 27, 27);
+}
+/* ------------------ */
+/* End header styling */
+
+
+/*  Main styling */
+/* ------------- */
+main {
+    margin: 0 auto;
+    width: 75%;
+}
+
+h1 {
+    font-size: 36px;
+    text-align: center;
+    padding: 10px;
+    margin: 100px 0 20px;
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 22px;
+    text-align: center;
+    margin: 25px 0;
+    padding-bottom: 12px; 
+}
+
+p {
+    background-color: darkblue;
+    border-radius: 5px;
+    color: aliceblue;
+    font-size: 16px;
+    padding: 8px;
+    margin: 5px auto;
+    width: 300px;
+}
+
+#feedback {
+    margin-top: 20px;
+    border-top: 4px solid darkblue;
+    padding: 10px;
+    font-size: 20px;
+    color: blue;
+}
+
+/* ---------------- */
+/* End main styling */
+
+
+
+
