@@ -1,4 +1,4 @@
-    // Element selectors
+// Element selectors
 const timerEl = document.getElementById('timer');
 const questionEl = document.getElementById('question-text');
 const ansOneEl = document.getElementById('opt-one');
@@ -7,17 +7,22 @@ const ansThreeEl = document.getElementById('opt-three');
 const ansFourEl = document.getElementById('opt-four');
 const feedbackEl = document.getElementById('feedback');
 const ansAreaEl = document.getElementById('answer-area');
+const startButton = document.getElementById('start-button');
 
 
-    // Global variables
+// Global variables
+
+// For calculating final score
 let rightAnswers = 0;
-let wrongAnswers = 0;
+let finalScore = 0;
+
+// Time related
 let isOver = false;
 let timer;
 let timerCount;
 
-    // The quiz array; each question in an object, with the 'answers' key being an array of objects
-        //the correct answer has a second key/value pair used to identify it
+// The quiz array; each question in an object, with the 'answers' key being an array of objects
+    // The correct answer has a second key/value pair used to identify it
 const quiz = [
     { question: "Which choice is NOT an HTML tag?",
       answers: [
@@ -84,7 +89,7 @@ const quiz = [
       ]
     },
     { question: "In JS, what is the term for a set of key/value pairs?",
-    answers: [
+      answers: [
         { text : "A) dictionary"},
         { text : "B) array"},
         { text : "C) object", isCorrect : true},
@@ -102,32 +107,40 @@ const quiz = [
 ];
 
 
-// functions and logic will go here
-// The setTimer function starts and stops the timer and triggers winGame() and loseGame()
-// function startTimer() {
-//     // Sets timer
-//     timer = setInterval(function() {
-//       timerCount--;
-//       timerEl.textContent = timerCount;
-//       if (timerCount >= 0) {
-//         // Tests if win condition is met
-//         if (isOver && timerCount > 0) {
-//           // Clears interval and stops timer
-//           clearInterval(timer);
-//         //   winGame();
-//         }
-//       }
-//       // Tests if time has run out
-//       if (timerCount === 0) {
-//         // Clears interval
-//         clearInterval(timer);
-//         timerEl.textContent = 0;
-//         // loseGame();
-//       }
-//     }, 1000);
-//   }
+// Function declarations
 
-    // Given an index, puts its question/answers on the screen
+// Will trigger when start button is clicked; renders quiz and starts timer
+function startGame() {
+    isOver = false;
+    timerCount = 45;
+    startButton.disabled = true;
+    document.getElementById('start-area').hidden = true;
+    document.getElementById('quiz-game').hidden = false;
+    startTimer();
+}
+
+// Starts the timer as well as ends the game in certain conditions
+    // I yoinked this almost verbatim from the 'hangman' mini-project
+function startTimer() {
+    timer = setInterval(function() {
+        timerCount--;
+        timerEl.textContent = timerCount;
+        if (timerCount > 0) {
+            if (isOver && timerCount > 0) {
+                clearInterval(timer);
+                endGame();
+            }
+        }
+        // Has to factor in numbers below zero, in case there's a time decrement when the timer is already close to 0
+        if (timerCount <= 0) {
+            clearInterval(timer);
+            endGame();
+        }
+    }, 1000);
+}
+
+// Two helper functions for the 'click' event listener (both will take the global 'i' variable as an argument):
+    // Given an index, puts its question/answers on the into the appropriate elements
 function setQuestion(index) {
     questionEl.textContent = quiz[index].question;
     ansOneEl.textContent = quiz[index].answers[0].text;
@@ -136,27 +149,37 @@ function setQuestion(index) {
     ansFourEl.textContent = quiz[index].answers[3].text;
 }
 
-
-function printEnd() {
-    console.log(`game over`, rightAnswers, wrongAnswers);
-}
-
-// given the index of the quiz array, this will return the text of the correct answer (for matching)
+    // Given the index of the quiz array, this will return the text of the correct answer (for matching)
 function getCorrectAns(index) {
-    const q = quiz[index];
-    for (a of q.answers) {
-        if (a.isCorrect) {
-            return a.text;
+    for (let ans of quiz[index].answers) {
+        if (ans.isCorrect) {
+            return ans.text;
         }
     }
 }
 
-// timerCount = 10
-// startTimer();
+// Ends the game by removing quiz elements and timer, tabulates final score, displays score submission form
+function endGame() {
+    document.getElementById('quiz-game').hidden = true;
+    document.getElementById('game-over-form').hidden = false;
+    finalScore = rightAnswers + timerCount;
+    // The following is silly but it can happen in the case of a wrong answer (time decrement) when the timer is near 0
+    if (finalScore < 0) {
+        finalScore = 0;
+    }
+    document.getElementById('final-score').textContent = `Your final score is ${finalScore}.`
+    timerEl.textContent = '';
+}
 
+
+
+// Sets the index/increment value, adds text content for the first question
+    // Though, it isn't displayed until the game is actually started
 let i = 0;
 setQuestion(i);
 
+
+// Lots of logic here; I'm using the (targeted) click event to increment and loop through the quiz
 ansAreaEl.addEventListener('click', function(event) {
     const selected = event.target;
     if (selected.matches("p") && !isOver) {
@@ -165,18 +188,23 @@ ansAreaEl.addEventListener('click', function(event) {
             rightAnswers++;
         } else {
             feedbackEl.textContent = `Wrong`;
-            // decerement timer
-            wrongAnswers++;
+            timerCount = timerCount - 5;
         }
         i++;
         if (i < quiz.length) {
             setQuestion(i);
         } else {
             isOver = true;
-            printEnd();
         }
         // setTimeout(feedbackEl.textContent = '', 1000);
     }
 });
 
+// Starts the game (by calling the eponymous function) upon button click
+startButton.addEventListener('click', startGame);
+
+// Need a submit click event for the submit score form
+document.querySelector('form').addEventListener('submit', function() {
+
+})
 

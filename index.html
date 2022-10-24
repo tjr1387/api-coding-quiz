@@ -11,16 +11,21 @@
 </head>
 
 <body>
-
     <header>
         <nav>
             <a href="./assets/html/scoreboard.html">Scoreboard</a>
-            <span id="timer"></span>
+            <span id="timer"></span>  <!-- This will display the timer once the game is started -->
         </nav>
     </header>
     <main>
         <h1>Coding Quiz</h1>
-        <section>
+        <!-- Prior to the game starting, this will be the only 'section' shown on screen -->
+        <section id="start-area">
+            <p>Welcome to the coding quiz. Click to start!</p>
+            <button id="start-button">Begin Quiz</button>
+        </section>
+        <!-- The quiz section, which will start hidden until the start button is hit -->
+        <section id="quiz-game" hidden>
             <h2 id="question-text"></h2>
             <div id="answer-area">
                 <p id="opt-one"></p>
@@ -28,13 +33,19 @@
                 <p id="opt-three"></p>
                 <p id="opt-four"></p>
             </div>
-        </section>
-        <section>
             <h3 id="feedback"></h3>
         </section>
+        <!-- The 'game over' screen. Only shows once the quiz has been completed (all questions answers OR time runs out) -->
+        <section id="game-over-form" hidden>
+            <h2>Game over!</h2>
+            <p id="final-score"></p>
+            <form action="./assets/html/scoreboard.html">
+                <label for="name">Enter name:</label>
+                <input type="text" id="name" name="name" required>
+                <button>Submit</button>
+            </form>
+        </section>
     </main>
-
-    <!-- no footer needed for this -->
 
     <script src="./assets/js/script.js"></script>
 </body>
