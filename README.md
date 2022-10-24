@@ -12,7 +12,10 @@ N/A
 ## Usage
 You will be presented with a 'start' button to begin the quiz. Once started, you will face 10 questions and four choices with which to answer, with 60 seconds on the timer. Click on your selected answer. If correct, you will be told so and will be presented with the next question. If wrong, you will be told so, will see the next question, and will receieve a 10 second deduction to the timer. The game will end once you've answered the last question _or_ the timer hits zero. Once done, you will see your score -- each correct answer is worth one point, plus however many seconds were left on the timer when you finished. You can enter your name/initials to submit it to the scoreboard. On the scoreboard page, you will see your name and score (and other scores stored on the browser). You have the option to look at the scoreboard at any time, as well as clear the scoreboard.
 
-Screenshot: 
+Screenshot:
+![A quiz question](https://github.com/tjr1387/api-coding-quiz/assets/mockups/quiz.png?raw=true)
+![Game over screen; submit score form](https://github.com/tjr1387/api-coding-quiz/assets/mockups/game-over.png?raw=true)
+![Scoreboard with a few scores](https://github.com/tjr1387/api-coding-quiz/assets/mockups/scoreboard.png?raw=true)
 
 Link to live site: 
 
