@@ -208,8 +208,18 @@ document.querySelector('form').addEventListener('submit', function(event) {
 
 // This will grab the name from the input and the final score, and store it locally
 function storeEntry() {
+    // Build object for current score
     const scoreName = document.getElementById('name').value;
     const scoreObject = {name : scoreName, score: finalScore};
-    localStorage.setItem("scores", JSON.stringify(scoreObject));
+    // Grab your local storage item to see if theres anything in it (if it exists)
+    const storedScores = JSON.parse(localStorage.getItem("scores"));
+    if (!storedScores) {
+        // If theres nothing in local storage, put the object you built in an array, then store it
+        localStorage.setItem("scores", JSON.stringify([scoreObject]));
+    } else {
+        // If there are previous scores, append (push) the current score's object to the array, then store it
+        storedScores.push(scoreObject);
+        localStorage.setItem("scores", JSON.stringify(storedScores));
+    }
 }
 

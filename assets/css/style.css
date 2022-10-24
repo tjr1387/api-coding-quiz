@@ -1,3 +1,10 @@
+/* Variables and broad scope */
+/* ------------------------- */
+:root {
+    --dark-blue: rgb(11, 4, 107);
+    --light-blue: rgb(221, 247, 253);
+}
+
 * {
     font-family: 'Trebuchet', sans-serif;
     background-color: rgb(216, 206, 253);
@@ -8,9 +15,9 @@
 /* Header styling */
 /* -------------- */
 nav {
-    background-color:aliceblue;
+    background-color: var(--light-blue);
     padding: 10px;
-    border-bottom: 2px solid darkblue;
+    border-bottom: 2px solid var(--dark-blue);
     min-height: 60px;
 }
 
@@ -22,15 +29,17 @@ nav a {
 
 nav a:hover {
     font-weight: 600;
-    color: darkblue;
+    color: var(--dark-blue);
 }
 
-#timer {
+/* '#clear' is on the 'scoreboard' HTML page, but it works fine to look like the timer */
+#timer, #clear {
     float: right;
     background-color: inherit;
     font-size: 30px;
     font-weight: 700;
     color: rgb(192, 27, 27);
+    padding: 4px;
 }
 /* ------------------ */
 /* End header styling */
@@ -67,9 +76,9 @@ p {
 }
 
 #answer-area p {
-    background-color: darkblue;
+    background-color: var(--dark-blue);
     border-radius: 5px;
-    color: aliceblue;
+    color: var(--light-blue);
     font-size: 16px;
     padding: 8px;
     margin: 5px;
@@ -86,7 +95,7 @@ p {
 
 #feedback {
     margin-top: 20px;
-    border-top: 4px solid darkblue;
+    border-top: 4px solid var(--dark-blue);
     padding: 10px;
     font-size: 20px;
     color: blue;
@@ -102,8 +111,8 @@ form input {
 }
 
 button {
-    background-color: darkblue;
-    color: aliceblue;
+    background-color: var(--dark-blue);
+    color: var(--light-blue);
     font-weight: 600;
     border-radius: 3px;
     padding: 8px;
@@ -113,21 +122,36 @@ button:hover {
     cursor: pointer;
     border: 2px solid orange;
 }
+/* ---------------- */
+/* End main styling */
 
 
-/* For hte scoreboard page */
+
+/* For the scoreboard page */
 /* ----------------------- */
 
 .score-entry {
     text-align: center;
     font-weight: 600;
+    font-size: 22px;
+}
+
+#clear:hover {
+    background-color: black;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+#none-msg {
+    color: gray;
+    font-size: 18px;
+    text-align: center;
 }
 
 
 
 
-/* ---------------- */
-/* End main styling */
+
 
 
 

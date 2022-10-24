@@ -12,12 +12,19 @@
 
 <body>
     <header>
-        <nav><a href="../../index.html">Back to Quiz</a></nav>
+        <nav>
+            <a href="../../index.html">Back to Quiz</a>
+            <span id="clear">CLEAR SCORES</span>
+        </nav>
     </header>
     <main>
-        <h1>High Scores</h1>
+        <h1>Scores</h1>
         <section id="scoreboard-container">
+
             <!-- for each score in storage, a p (class = score-entry) will be created and go here -->
+
+            <!-- The following is in the case of the scoreboard (and local storage) being empty -->
+            <p id="none-msg" hidden>There are currently no scores.</p>
         </section>
     </main>
     <script src="../../assets/js/scores-script.js"></script>
