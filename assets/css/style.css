@@ -114,6 +114,18 @@ button:hover {
     border: 2px solid orange;
 }
 
+
+/* For hte scoreboard page */
+/* ----------------------- */
+
+.score-entry {
+    text-align: center;
+    font-weight: 600;
+}
+
+
+
+
 /* ---------------- */
 /* End main styling */
 

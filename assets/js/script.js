@@ -11,6 +11,7 @@ const startButton = document.getElementById('start-button');
 
 
 // Global variables
+let i = 0;
 
 // For calculating final score
 let rightAnswers = 0;
@@ -116,6 +117,7 @@ function startGame() {
     startButton.disabled = true;
     document.getElementById('start-area').hidden = true;
     document.getElementById('quiz-game').hidden = false;
+    setQuestion(i);
     startTimer();
 }
 
@@ -172,12 +174,7 @@ function endGame() {
 }
 
 
-
-// Sets the index/increment value, adds text content for the first question
-    // Though, it isn't displayed until the game is actually started
-let i = 0;
-setQuestion(i);
-
+// Event listeners
 
 // Lots of logic here; I'm using the (targeted) click event to increment and loop through the quiz
 ansAreaEl.addEventListener('click', function(event) {
@@ -204,7 +201,15 @@ ansAreaEl.addEventListener('click', function(event) {
 startButton.addEventListener('click', startGame);
 
 // Need a submit click event for the submit score form
-document.querySelector('form').addEventListener('submit', function() {
-
+document.querySelector('form').addEventListener('submit', function(event) {
+    // event.preventDefault();
+    storeEntry();
 })
+
+// This will grab the name from the input and the final score, and store it locally
+function storeEntry() {
+    const scoreName = document.getElementById('name').value;
+    const scoreObject = {name : scoreName, score: finalScore};
+    localStorage.setItem("scores", JSON.stringify(scoreObject));
+}
 
