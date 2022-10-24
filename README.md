@@ -3,7 +3,7 @@
 
 
 ## Description
-This is a 10 question multiple choice quiz with some broad, beginner front-end coding questions. A timer will tick down to zero, with wrong answers taking even more time off of it. At the end you will receive a score, and be able to put post it with your name onto a scoreboard.
+This is a 10 question multiple choice quiz with some broad, beginner front-end coding questions. A timer will tick down to zero, with wrong answers taking even more time off of it. At the end you will receive a score, and be able to post it with your name onto a scoreboard.
 
 ## Installation
 
