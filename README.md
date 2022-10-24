@@ -17,7 +17,7 @@ Screenshots:
 ![Game over screen; submit score form](/assets/mockups/game-over.png?raw=true)
 ![Scoreboard with a few scores](/assets/mockups/scoreboard.png?raw=true)
 
-Link to live site: 
+Link to live site: https://tjr1387.github.io/api-coding-quiz/
 
 
 ## Flaws/Comments
