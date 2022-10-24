@@ -21,6 +21,7 @@ if (storedScores) {
     showHidden();
 }
 
+
 // Click event for 'clear scores'
 document.getElementById('clear').addEventListener('click', function() {
     // Empty local storage

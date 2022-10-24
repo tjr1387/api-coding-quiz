@@ -33,6 +33,7 @@
                 <p id="opt-three"></p>
                 <p id="opt-four"></p>
             </div>
+            <!-- This will pop up as feedback for the previous question (whether right or wrong) -->
             <h3 id="feedback"></h3>
         </section>
         <!-- The 'game over' screen. Only shows once the quiz has been completed (all questions answers OR time runs out) -->
@@ -41,7 +42,7 @@
             <p id="final-score"></p>
             <form action="./assets/html/scoreboard.html">
                 <label for="name">Enter name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" maxlength="12" required />
                 <button>Submit</button>
             </form>
         </section>

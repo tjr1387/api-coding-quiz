@@ -11,13 +11,14 @@ const startButton = document.getElementById('start-button');
 
 
 // Global variables
+
 let i = 0;
 
-// For calculating final score
+    // For calculating final score
 let rightAnswers = 0;
 let finalScore = 0;
 
-// Time related
+    // Time related
 let isOver = false;
 let timer;
 let timerCount;
@@ -110,10 +111,10 @@ const quiz = [
 
 // Function declarations
 
-// Will trigger when start button is clicked; renders quiz and starts timer
+// Will trigger when start button is clicked; renders quiz with first question and starts timer
 function startGame() {
     isOver = false;
-    timerCount = 45;
+    timerCount = 60;
     startButton.disabled = true;
     document.getElementById('start-area').hidden = true;
     document.getElementById('quiz-game').hidden = false;
@@ -173,40 +174,8 @@ function endGame() {
     timerEl.textContent = '';
 }
 
-
-// Event listeners
-
-// Lots of logic here; I'm using the (targeted) click event to increment and loop through the quiz
-ansAreaEl.addEventListener('click', function(event) {
-    const selected = event.target;
-    if (selected.matches("p") && !isOver) {
-        if (selected.textContent === getCorrectAns(i)) {
-            feedbackEl.textContent = `Correct!`;
-            rightAnswers++;
-        } else {
-            feedbackEl.textContent = `Wrong`;
-            timerCount = timerCount - 5;
-        }
-        i++;
-        if (i < quiz.length) {
-            setQuestion(i);
-        } else {
-            isOver = true;
-        }
-        // setTimeout(feedbackEl.textContent = '', 1000);
-    }
-});
-
-// Starts the game (by calling the eponymous function) upon button click
-startButton.addEventListener('click', startGame);
-
-// Need a submit click event for the submit score form
-document.querySelector('form').addEventListener('submit', function(event) {
-    // event.preventDefault();
-    storeEntry();
-})
-
-// This will grab the name from the input and the final score, and store it locally
+// This will grab the name from the input and store it with the score locally, as an array so multiple scores can be saved
+    // This is set up to call on the 'submit' event
 function storeEntry() {
     // Build object for current score
     const scoreName = document.getElementById('name').value;
@@ -222,4 +191,35 @@ function storeEntry() {
         localStorage.setItem("scores", JSON.stringify(storedScores));
     }
 }
+
+
+// Event listeners
+
+// Lots of logic here; the meat of the quiz; I'm using the (targeted) click event to increment through the questions
+ansAreaEl.addEventListener('click', function(event) {
+    const selected = event.target;
+    if (selected.matches("p") && !isOver) {
+        if (selected.textContent === getCorrectAns(i)) {
+            feedbackEl.textContent = `Previous answer: Correct!`;
+            rightAnswers++;
+        } else {
+            feedbackEl.textContent = `Previous answer: Wrong`;
+            timerCount = timerCount - 10;
+        }
+        i++;
+        if (i < quiz.length) {
+            setQuestion(i);
+        } else {
+            isOver = true;
+        }
+    }
+});
+
+// Starts the game upon button click
+startButton.addEventListener('click', startGame);
+
+// Submit click event for the submit score form, which runs score storage
+document.querySelector('form').addEventListener('submit', storeEntry);
+
+
 
